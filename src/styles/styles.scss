@@ -1,0 +1,184 @@
+@import "libs/bootstrap";
+@import "libs/toastify";
+
+* {
+  font-family: "Source Sans Pro", sans-serif !important;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f4f7;
+  color: #0b1047;
+  min-width: max-content;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+#root {
+  height: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.regular-text {
+  font-style: normal;
+  font-weight: normal;
+}
+
+.medium-text {
+  font-style: normal;
+  font-weight: 500;
+}
+
+.semibold-text {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.bold-text {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.disabled-text {
+  color: #8f98a6;
+}
+
+.active-color {
+  color: #0055ff;
+}
+
+.fs12 {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.fs14 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.fs15 {
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.fs16 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.fs18 {
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.fs20 {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.fs24 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.fs36 {
+  font-size: 36px;
+  line-height: 48px;
+}
+
+.slide-pane {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  width: 480px;
+  height: 100%;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s;
+  will-change: transform;
+}
+.slide-pane:focus {
+  outline-style: none;
+}
+.slide-pane_from_right {
+  margin-left: auto;
+  transform: translateX(100%);
+}
+.slide-pane_from_right.ReactModal__Content--after-open {
+  transform: translateX(0%);
+}
+.slide-pane_from_right.ReactModal__Content--before-close {
+  transform: translateX(100%);
+}
+
+.slide-pane__overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.modal-container {
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  background-color: white;
+  width: 720px;
+  height: max-content;
+  overflow: hidden;
+  &:focus {
+    outline: none;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(38, 49, 67, 0.88);
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: all 300ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
