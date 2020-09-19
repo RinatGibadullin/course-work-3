@@ -13,6 +13,7 @@ const SignIn = (props: SignInProps) => {
     const dispatch = useDispatch();
     const userIsLogged = useSelector(isLoggedSelector)
     const onSubmit = (formData: AuthCredentials) => {
+        debugger
         dispatch(login(formData))
     }
 

@@ -3,5 +3,5 @@ import httpResource from "app/modules/core/infrastructure/httpResource";
 
 export class SessionResource extends BaseRestResource {}
 
-const sessionResource = new SessionResource(httpResource, 'sessions');
+const sessionResource = new SessionResource(httpResource, 'login');
 export default sessionResource;

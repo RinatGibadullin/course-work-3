@@ -9,7 +9,6 @@ export type CurrentUserState = {
   isLogged: boolean
   session?: {
     token: string
-    expiredAt?: string
   }
   user: User | null
 };
@@ -23,12 +22,11 @@ const initialState: CurrentUserState = {
 };
 
 const userAuthSuccessReducer = (state: CurrentUserState, action: PayloadAction<AuthResponse>) => {
-  const { user, session } = action.payload
+  const { token } = action.payload
   state.isAuthChecked = true;
   state.isAuthChecking = false;
   state.isLogged = true;
-  state.session = session;
-  state.user = user;
+  state.session = {token: token};
 };
 
 const userAuthFailedReducer = (state: CurrentUserState, action: any) => {

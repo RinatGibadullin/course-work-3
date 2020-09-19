@@ -1,12 +1,12 @@
 
 interface User {
-    id?: number,
+    id: number,
     name: string,
-    last_name?: string,
-    patronymic?: string,
+    username: string,
     email: string,
-    password: string,
-    created_at: string
+    rating: number,
+    contactPhone: string,
+    geoPosition: string,
 }
 
 export default User;

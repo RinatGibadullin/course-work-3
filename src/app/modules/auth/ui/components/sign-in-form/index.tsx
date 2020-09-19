@@ -18,10 +18,10 @@ const SignInForm: React.FC<InjectedFormProps<AuthCredentials>> = ({ handleSubmit
         <div className="d-flex flex-column my-11">
             <div className="d-flex flex-column mb-9">
                 <Field component={UDInput}
-                    placeholder="E-mail"
+                    placeholder="username"
                     validate={[emailRequired]}
                     disabled={isLoading}
-                    name={"email"}
+                    name={"username"}
                     props={{ lg: true }} />
             </div>
             <div className="d-flex flex-column">

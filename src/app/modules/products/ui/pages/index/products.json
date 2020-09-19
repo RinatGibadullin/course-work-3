@@ -1,0 +1,30 @@
+[
+    {
+      "category": {
+        "id": 0,
+        "name": "FRUIT"
+      },
+      "cost": 0,
+      "count": 0,
+      "countType": "KILOGRAM",
+      "description": "string",
+      "id": 0,
+      "images": [
+        {
+          "id": 0,
+          "name": "string"
+        }
+      ],
+      "rating": 0,
+      "title": "string",
+      "user": {
+        "contactPhone": "string",
+        "email": "string",
+        "geoPosition": "string",
+        "id": 0,
+        "name": "string",
+        "rating": 0,
+        "username": "string"
+      }
+    }
+  ]

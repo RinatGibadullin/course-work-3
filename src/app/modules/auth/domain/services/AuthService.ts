@@ -12,6 +12,7 @@ import localforage from "localforage";
 
 class AuthService {
   private STORE_TOKEN = '@token';
+  private STORE_USERNAME = '@username'
 
   constructor(private httpResource: BaseResource,
     private userRepository: UserRepository,
@@ -21,18 +22,19 @@ class AuthService {
   public login(credentials: AuthCredentials): Promise<AuthResponse> {
     const payload = { session: credentials };
     return this.sessionResource.create(payload)
-      .then((sessionResponse: SessionResponse) => this.handleSessionResponse(sessionResponse))
-      .then(({ user, token }: { user: User, token: string }) => this.createAuthResponse({ user, token }))
+      .then((sessionResponse: SessionResponse) => this.handleSessionResponse(payload.session.username, sessionResponse))
   }
 
   public checkUserAuth(): Promise<AuthResponse|null> {
-    return this.getStoredSession().then((storedAuthResponse: AuthResponse) => {
-      const isValid = storedAuthResponse?.session?.token != null && storedAuthResponse?.user?.id != null;
+    return this.getStoredSession().then(async (storedAuthResponse: AuthResponse) => {
+      const isValid = storedAuthResponse?.token != null;
       if (isValid) {
-        const token = storedAuthResponse.session.token;
+        const token = storedAuthResponse.token;
+        const current_username = await localforage.getItem(this.STORE_USERNAME, (error: any, username: string) => { return username; })
+        debugger
         this.setAuthHeader(token);
-        return this.userRepository.loadById(storedAuthResponse.user.id)
-          .then((user: User) => this.createAuthResponse({ user, token }));
+        return this.userRepository.loadById(current_username)
+          .then((user: User) => this.createAuthResponse(token));
       }
       throw new Error('Session not found');
     }).catch((e) => {
@@ -45,27 +47,27 @@ class AuthService {
     return this.clearStoredSession();
   }
 
-  private handleSessionResponse(sessionResponse: SessionResponse) {
-    const data = sessionResponse.data
-    if (data.token != null && data.user_id != null) {
+  private handleSessionResponse(username: string, sessionResponse: SessionResponse) {
+    const data = sessionResponse
+    if (data.token != null) {
       this.setAuthHeader(data.token);
-      return this.userRepository.loadById(data.user_id)
-        .then((user: User) => ({ user, token: data.token }));
+      this.storeSession({token: data.token});
+      localforage.setItem(this.STORE_USERNAME, username)
+      return {token: data.token};
     }
     udError.throw(UDErrorCode.AuthResponseInvalid);
   }
 
-  private createAuthResponse({ user, token }: { user: User, token: string }) {
+  private createAuthResponse(token : string ) {
     const authResponse = {
-      user,
-      session: { token }
+      token
     };
     this.storeSession(authResponse);
     return authResponse;
   }
 
   private storeSession(authResponse: AuthResponse): void {
-    localforage.setItem(this.STORE_TOKEN, authResponse);
+    localforage.setItem(this.STORE_TOKEN, authResponse.token);
   }
 
   private getStoredSession(): Promise<AuthResponse> {
@@ -73,7 +75,7 @@ class AuthService {
   }
 
   private setAuthHeader(token: string): void {
-    this.httpResource.setHeaders({ 'X-Authentication-Token': token });
+    this.httpResource.setHeaders({ 'Authorization': 'Bearer ' + token });
   }
 
   private clearStoredSession(): Promise<void> {
