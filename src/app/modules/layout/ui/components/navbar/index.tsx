@@ -11,20 +11,34 @@ import ContactsOutlinedIcon from '@material-ui/icons/ContactsOutlined';
 import AppsIcon from '@material-ui/icons/Apps';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { useHistory } from "react-router-dom";
 
 
 const NavBar = () => {
     const userIsLogged = useSelector(isLoggedSelector)
+    const history = useHistory()
     return (
         <StyledNavBar>
-            <img src={logo} style={{ height: "70px" }} />
-            <UDMaterialButton label="Главная" icon={<AppsIcon />} />
-            <UDMaterialButton label="Каталог" icon={<DnsIcon />} />
-            <UDMaterialButton label="Доставка и оплата" icon={<LocalShippingIcon />} />
+            <img src={logo} style={{ height: "100%" }} />
+            <UDMaterialButton
+                label="Главная"
+                icon={<AppsIcon />}
+                onClick={() => history.push("/products")}
+            />
+            <UDMaterialButton
+                label="Каталог"
+                icon={<DnsIcon />}
+                onClick={() => history.push("/products")}
+            />
+            <UDMaterialButton
+                label="Доставка и оплата"
+                icon={<LocalShippingIcon />}
+                onClick={() => history.push("/products")}
+            />
             {userIsLogged ? (
                 <div>
                     <UDMaterialButton label="Профиль" icon={<AccountBoxIcon />} />
-                    <UDMaterialButton label="Выход" icon={<ExitToAppIcon/>}/>
+                    <UDMaterialButton label="Выход" icon={<ExitToAppIcon />} />
                 </div>
             ) : (
                     <div>

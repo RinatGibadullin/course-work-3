@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./app/modules/auth/store";
 import { reducer as formReducer } from 'redux-form'
+import productsReducer from "app/modules/products/store/reducer";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
-  form: formReducer
+  form: formReducer,
+  products: productsReducer
 });
 
 // const sentryReduxEnhancer = createReduxEnhancer({});

@@ -10,11 +10,16 @@ const ProductsList = (props: Props) => {
     const { products } = props
     return (
         <ul>
-            {products.map(product =>
-                <li key={product.id}>
-                    <ProductsListItem product={product} />
-                </li>
-            )}
+            <div className="container-fluid">
+                <div className="row justify-content-between">
+                    {products.map(product =>
+                        <li key={product.id}>
+                            <ProductsListItem product={product} />
+                        </li>
+                    )}
+                </div>
+            </div>
+
         </ul>
     )
 };

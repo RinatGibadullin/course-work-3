@@ -30,7 +30,7 @@ const AppRouter = () => {
                 </Route>
                 <Route path="/">
                     <NavBar />
-                    <div style={{ paddingTop: "80px" }}>
+                    <div style={{ paddingTop: "80px", maxWidth: "1500px" }}>
                         <Route exact path="/">
                             <Home />
                         </Route>
