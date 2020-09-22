@@ -8,13 +8,14 @@ import SignIn from "../auth/ui/pages/sign-in";
 import Home from "../home/ui/pages";
 import NavBar from "../layout/ui/components/navbar";
 import GuardedRoute from "../permissions/ui/components/route-guard";
+import NewProduct from "../products/ui/components/new-product";
 import Products from "../products/ui/pages/index";
 
 
 const MainPagesRouter = () => {
     return (
-        <GuardedRoute exact path="/profile">
-            <Home />
+        <GuardedRoute exact path="/products/new">
+            <NewProduct />
         </GuardedRoute>
     )
 }
@@ -36,6 +37,9 @@ const AppRouter = () => {
                         </Route>
                         <Route exact path="/products">
                             <Products />
+                        </Route>
+                        <Route exact path="/products/new">
+                            <NewProduct />
                         </Route>
                     </div>
                 </Route>

@@ -16,7 +16,7 @@ export const StyledInput = styled.input`
     background-color: transparent;
     width: 100%;
     height: 36px; 
-    padding: 8px 12px;
+    padding: 12px 16px;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
